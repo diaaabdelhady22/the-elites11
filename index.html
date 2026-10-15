@@ -7,6 +7,7 @@
   <title>The Elites — English Learning Platform</title>
   <meta name="description" content="The Elites English learning platform with Mr. Moataz Helal.">
   <link rel="icon" type="image/png" href="icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
@@ -470,6 +471,7 @@ html[data-theme="dark"] .word-cloud span{color:#dce8f5}
             <img src="logo.png" alt="The Elites">
           </button>
           <nav class="nav">
+            <button onclick="installPWA()"><span class="mi">download</span> Download App</button>
             <button onclick="navigate('about')"><span class="mi">person</span> About Teacher</button>
             <button onclick="navigate('contact')"><span class="mi">mail</span> Contact</button>
             <button onclick="navigate('login')"><span class="mi">login</span> Login</button>
@@ -483,6 +485,7 @@ html[data-theme="dark"] .word-cloud span{color:#dce8f5}
           <button onclick="navigate('contact');closeMobileNav()"><span class="mi">mail</span> Contact</button>
           <button onclick="navigate('login');closeMobileNav()"><span class="mi">login</span> Login</button>
           <button onclick="navigate('register');closeMobileNav()"><span class="mi">person_add</span> Register</button>
+          <button onclick="installPWA();closeMobileNav()"><span class="mi">download</span> Download App</button>
         </div>`;
     }else{
       header.innerHTML = `
@@ -535,6 +538,30 @@ html[data-theme="dark"] .word-cloud span{color:#dce8f5}
       if(icon) icon.textContent = "menu";
     }
   };
+
+  let deferredInstallPrompt = null;
+  window.addEventListener("beforeinstallprompt", event => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+  });
+  window.addEventListener("appinstalled", () => {
+    deferredInstallPrompt = null;
+    showToast("The Elites has been installed.");
+  });
+  window.installPWA = async () => {
+    if(window.matchMedia("(display-mode: standalone)").matches || !deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    const prompt = deferredInstallPrompt;
+    deferredInstallPrompt = null;
+    const choice = await prompt.userChoice;
+    if(choice.outcome === "accepted") showToast("Installing The Elites...");
+  };
+
+  if("serviceWorker" in navigator && /^https?:$/.test(location.protocol)){
+    navigator.serviceWorker.register("./service-worker.js").catch(error => {
+      console.error("Could not register the app service worker:", error);
+    });
+  }
 
   function homeView(){
     const words = [
