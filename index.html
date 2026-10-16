@@ -214,7 +214,7 @@ html[data-theme="dark"] .word-cloud span{color:#dce8f5}
     .content-card h3{margin:0 0 11px;font-size:18px}.content-card p{color:var(--muted);line-height:1.75;white-space:pre-wrap}
     .lesson-nav{display:flex;justify-content:space-between;gap:10px;margin-top:20px}
 
-    /* Player system: same interaction model as player(3), with The Elites colors/bar */
+    /* Player system: DOPAMINE colors and controls */
     .video-player{position:relative;background:#10151c;border-radius:14px;overflow:hidden;width:100%;aspect-ratio:16/9;box-shadow:0 15px 40px rgba(20,30,45,.14);-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
     .video-frame{position:absolute;inset:0}
     .video-frame iframe{width:100%;height:100%;border:0;display:block}
@@ -227,21 +227,48 @@ html[data-theme="dark"] .word-cloud span{color:#dce8f5}
     .timeline span{display:block;height:100%;width:0;background:var(--orange);border-radius:inherit}
     .control-row{display:flex;align-items:center;gap:3px}.control-row .spacer{flex:1}
     .time-label{color:#fff;font-size:12px;min-width:85px;text-align:center}
-    .speed-menu{position:relative}.speed-pop{display:none;position:absolute;bottom:45px;right:0;background:#fff;color:var(--navy);border-radius:9px;box-shadow:0 8px 25px rgba(0,0,0,.25);overflow:hidden;min-width:100px}
-    .speed-menu.open .speed-pop{display:block}.speed-pop button{color:var(--navy);display:block;width:100%;text-align:left;padding:9px 12px}.speed-pop button:hover{background:#f1f3f5}
+    .speed-menu{position:relative;flex:none}.speed-pop{display:none;position:absolute;bottom:calc(100% + 9px);right:0;background:#fff;color:#132238;border:1px solid #dfe5ec;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,.28);overflow:hidden;min-width:108px;z-index:40;padding:4px}
+    .speed-menu.open .speed-pop{display:block}.custom-video-controls .speed-pop button{color:#132238;background:#fff;border:0;display:block;width:100%;text-align:left;padding:9px 12px;min-width:0;border-radius:6px;white-space:nowrap}.custom-video-controls .speed-pop button:hover{background:#f1f3f5;color:#132238}
     .video-player .center-play-circle{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) scale(.82);z-index:3;width:64px;height:64px;border-radius:50%;background:rgba(15,23,42,.92);border:2px solid var(--orange);color:var(--orange);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .24s cubic-bezier(.34,1.56,.64,1);box-shadow:0 10px 30px rgba(0,0,0,.35)}
     .video-player .center-play-circle.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
     .video-player .center-play-circle .mi{font-size:28px}
     .video-player.controls-hidden .custom-video-controls{opacity:0;transform:translateY(100%);pointer-events:none}
     .video-player.controls-hidden{cursor:none}
-    .player-settings-panel{display:none;position:absolute;bottom:52px;right:0;width:240px;padding:14px;border-radius:14px;background:rgba(255,255,255,.98);color:var(--navy);box-shadow:0 12px 30px rgba(0,0,0,.28);border:1px solid var(--line);z-index:20}
-    .player-settings-panel.open{display:block}.settings-title{font-weight:800;font-size:13px;margin-bottom:12px}.settings-label{font-size:11px;font-weight:800;color:var(--muted);margin:10px 0 6px}.settings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
-    .settings-grid .quality-btn{min-width:0;padding:7px 4px;font-size:10px;font-weight:700;border-radius:7px;border:1px solid var(--line);background:var(--soft);color:var(--navy)}
-    .settings-grid .quality-btn.active{border-color:var(--orange);background:rgba(244,123,32,.12);color:var(--orange-dark)}
+    .player-settings-panel{display:none;position:absolute;bottom:58px;right:8px;width:240px;max-height:calc(100% - 72px);overflow:auto;padding:14px;border-radius:12px;background:#17212c;color:#f5f7fa;box-shadow:0 10px 28px rgba(0,0,0,.38);border:1px solid #344252;z-index:30}
+    #mobile-settings-btn{display:none}
+    .settings-speed-options{display:none}.settings-speed-options button{color:#132238!important;background:#f1f3f5!important;border:1px solid #dfe5ec!important;min-width:0!important;padding:8px 4px!important;font-size:11px!important}
+    .settings-speed-options button.active{border-color:var(--orange)!important;color:var(--orange-dark)!important;background:#fff3ea!important}
+    .player-settings-panel.open{display:block}.player-settings-panel .settings-title{color:#fff;font-weight:800;font-size:13px;margin-bottom:12px}.player-settings-panel .settings-label{color:#aab6c5}.settings-label{font-size:11px;font-weight:800;color:var(--muted);margin:10px 0 6px}.settings-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+    .settings-grid .quality-btn{min-width:0;padding:7px 4px;font-size:10px;font-weight:700;border-radius:7px;border:1px solid #344252;background:#202c39;color:#f1f4f7}
+    .settings-grid .quality-btn.active{border-color:var(--orange);background:rgba(244,123,32,.16);color:#ff9b52}
     @media(max-width:600px){
-      .custom-video-controls{padding:30px 8px 8px}.control-row{gap:2px}.custom-video-controls button{min-width:32px;padding:7px}.time-label{font-size:10px;min-width:72px}.speed-pop{min-width:86px}.player-settings-panel{right:-4px;width:210px}
+      .custom-video-controls{padding:30px 8px 8px}.control-row{gap:2px}.custom-video-controls button{min-width:32px;padding:7px}.time-label{font-size:10px;min-width:72px}.speed-pop{min-width:86px}.player-settings-panel{right:7px;width:min(240px,calc(100% - 14px));bottom:56px;max-height:calc(100% - 66px)}
     }
 
+
+    @media (max-width:600px) and (orientation:portrait){
+      .lesson-wrap{padding-top:20px}
+      .lesson-top{margin-bottom:14px}
+      .lesson-top h1{font-size:29px}
+      .video-player{aspect-ratio:auto;height:clamp(155px,46vw,185px);min-height:150px}
+      .video-frame,.video-frame iframe{height:100%}
+      .custom-video-controls{padding:7px 7px 8px}
+      .custom-video-controls .control-row{gap:4px}
+      .custom-video-controls button{min-width:34px;height:36px;padding:5px 6px;flex:none}
+      .custom-video-controls .time-label{font-size:10px;min-width:0;white-space:nowrap;padding:0 3px}
+      .custom-video-controls .spacer{display:none}
+      .custom-video-controls #caption-btn,.custom-video-controls #settings-btn{display:none}
+      .custom-video-controls #mobile-settings-btn{display:inline-flex;align-items:center;justify-content:center}
+      .custom-video-controls .speed-menu{display:none}
+      /* Portrait mobile: use almost the entire player for a readable settings sheet. */
+      .player-settings-panel{position:absolute;inset:8px;width:auto;max-height:none;overflow-y:auto;padding:16px;background:#17212c;color:#f5f7fa;border:1px solid #344252;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.42);z-index:30}
+      .player-settings-panel .settings-title{font-size:16px;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #344252}
+      .player-settings-panel .settings-label{font-size:12px;margin:12px 0 8px;color:#c2ccd8}
+      .settings-speed-options{display:block}
+      .settings-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+      .settings-grid .quality-btn{min-height:38px;padding:8px 6px;font-size:13px;border-radius:8px}
+      .lesson-layout{gap:14px}
+    }
     /* Profile / contact */
     .profile-grid{display:grid;grid-template-columns:280px 1fr;gap:22px}
     .profile-side,.profile-main,.contact-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:25px}
@@ -1087,10 +1114,15 @@ async function lessonView(courseId,lessonId){
             <button onclick="toggleCaptions()" id="caption-btn" class="caption-toggle" aria-label="Captions"><span class="mi">closed_caption</span></button>
             <div class="speed-menu" id="speed-menu"><button onclick="toggleSpeedMenu()" aria-label="Playback speed"><span class="mi">speed</span> 1×</button><div class="speed-pop">${[.75,1,1.25,1.5,1.75,2].map(s=>`<button onclick="setSpeed(${s})">${s}x</button>`).join("")}</div></div>
             <button onclick="togglePlayerSettings()" id="settings-btn" aria-label="Settings"><span class="mi">settings</span></button>
+            <button onclick="togglePlayerSettings()" id="mobile-settings-btn" aria-label="Playback settings"><span class="mi">settings</span></button>
             <button onclick="toggleFullscreen()" aria-label="Fullscreen"><span class="mi">fullscreen</span></button>
           </div>
           <div id="settings-panel" class="player-settings-panel">
             <div class="settings-title">Playback settings</div>
+            <div class="settings-speed-options">
+              <div class="settings-label">Playback speed</div>
+              <div class="settings-grid">${[.75,1,1.25,1.5,1.75,2].map(v=>`<button class="quality-btn ${v===1?"active":""}" onclick="setSpeed(${v})">${v}×</button>`).join("")}</div>
+            </div>
             <div class="settings-label">Quality</div>
             <div class="settings-grid">${["default","hd1080","hd720","large","medium"].map(q=>`<button class="quality-btn ${q==="default"?"active":""}" data-quality="${q}" onclick="setVideoQuality('${q}')">${q==="default"?"Auto":q==="hd1080"?"1080p":q==="hd720"?"720p":q==="large"?"480p":"360p"}</button>`).join("")}</div>
             <div class="settings-label">Captions</div>
@@ -1196,6 +1228,7 @@ async function lessonView(courseId,lessonId){
   };
   window.toggleSpeedMenu=()=>{
     showPlayerControls();
+    document.getElementById("settings-panel")?.classList.remove("open");
     document.getElementById("speed-menu")?.classList.toggle("open");
   };
   window.setSpeed=(speed)=>{
@@ -1204,9 +1237,11 @@ async function lessonView(courseId,lessonId){
     const menu=document.getElementById("speed-menu"),btn=menu?.querySelector(":scope > button");
     if(btn)btn.innerHTML=`<span class="mi">speed</span> ${Number(speed)}×`;
     menu?.classList.remove("open");
+    document.querySelectorAll(".settings-speed-options .quality-btn").forEach(b=>b.classList.toggle("active",Number(b.textContent.replace("×",""))===Number(speed)));
   };
   window.togglePlayerSettings=()=>{
     showPlayerControls();
+    document.getElementById("speed-menu")?.classList.remove("open");
     document.getElementById("settings-panel")?.classList.toggle("open");
   };
   window.setVideoQuality=(quality)=>{
